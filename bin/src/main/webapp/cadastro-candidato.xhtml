@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Página Inicial</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<ui:composition template="/template/v1.xhtml">
+		<ui:define name="titulo">Cadastro de Candidato</ui:define>
+		<ui:define name="conteudo">
+			<h:form>
+				<p:growl id="growl" showDetail="true" />
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton title="Save" icon="ui-icon-disk" update="growl codigo nome cargo partido"
+							value="Salvar" actionListener="#{cadastroCandidatoBean.salvar}"  />
+					</f:facet>
+				</p:toolbar>
+				<h:panelGrid columns="2" style="width:100%;">
+					<h:panelGrid columns="2" style="width:100%; padding: .5em 1em;">
+						<p:outputLabel for="codigo" value="Código" />
+						<p:inputText id="codigo" value="#{cadastroCandidatoBean.candidato.codigo}" />
+		
+						<p:outputLabel for="nome" value="Nome" />
+						<p:inputText id="nome" value="#{cadastroCandidatoBean.candidato.nome}" />
+		
+						<p:outputLabel for="cargo" value="Cargo" />
+						<p:selectOneMenu id="cargo" value="#{cadastroCandidatoBean.candidato.cargo}" style="width:125px">
+							<f:selectItem itemLabel="" itemValue="" />
+							<f:selectItem itemLabel="Deputado Federal"
+								itemValue="Deputado Federal" />
+							<f:selectItem itemLabel="Deputado Estadual"
+								itemValue="Deputado Estadual" />
+							<f:selectItem itemLabel="Senador" itemValue="Senador" />
+							<f:selectItem itemLabel="Governador" itemValue="Governador" />
+							<f:selectItem itemLabel="Presidente" itemValue="Presidente" />
+							<f:selectItem itemLabel="Prefeito" itemValue="Prefeito" />
+							<f:selectItem itemLabel="Vereador" itemValue="Vereador" />
+						</p:selectOneMenu>
+		
+						<p:outputLabel for="partido" value="Partido" />
+						<p:inputText id="partido" value="#{cadastroCandidatoBean.candidato.partido}" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<p:graphicImage name="images/foto-candidato.jpg" width="200" />
+						<p:fileUpload mode="simple" skinSimple="true"
+							label="Selecionar imagem" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

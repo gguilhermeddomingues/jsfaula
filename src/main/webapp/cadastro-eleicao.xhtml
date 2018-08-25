@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+	<ui:composition template="/template/v1.xhtml">
+		<ui:define name="titulo">Cadastro de Eleição</ui:define>
+		<ui:define name="conteudo">
+			<h:form>
+				<p:growl id="growl" showDetail="true" />
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton title="Save" icon="ui-icon-disk" update="growl codigo data pickListCargos pickListCandidatos"
+							value="Salvar" actionListener="#{cadastroEleicaoBean.salvar}"  />
+					</f:facet>
+				</p:toolbar>
+				<h:panelGrid columns="2" style="width:100%;">
+					<h:panelGrid columns="2" style="width:100%; padding: .5em 1em;">
+						<p:outputLabel for="codigo" value="Código" />
+						<p:inputText id="codigo" value="#{cadastroEleicaoBean.eleicao.codigo}" disabled="true" />
+		
+						<p:outputLabel for="data" value="Data" />
+						<p:calendar id="data" value="#{cadastroEleicaoBean.eleicao.data}" pattern="dd/MM/yyyy" mask="true" />
+					</h:panelGrid>	
+					<br/>
+					<p:fieldset legend="Selecione os cargos para a eleição" style="margin-bottom:20px">
+						<p:pickList id="pickListCargos" value="#{cadastroEleicaoBean.cargos}" var="cargo" 
+						    itemLabel="#{cargo}" itemValue="#{cargo}" showTargetControls="true" showSourceFilter="true" 
+						    showTargetFilter="true" filterMatchMode="contains">
+							<p:ajax event="transfer" listener="#{cadastroEleicaoBean.onTransfer}" update="pickListCandidatos" />    
+						</p:pickList>
+					</p:fieldset>
+					<br/>
+					<p:fieldset legend="Selecione os candidatos para a eleição" style="margin-bottom:20px">
+						<p:pickList id="pickListCandidatos" value="#{cadastroEleicaoBean.candidatos}" var="candidato" 
+						    itemLabel="#{candidato.codigo} - #{candidato.nome} (#{candidato.partido}) - #{candidato.cargo}" itemValue="#{candidato}"
+						    converter="candidatoConverter" showTargetControls="true" showSourceFilter="true" 
+						    showTargetFilter="true" filterMatchMode="contains" />
+					</p:fieldset>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

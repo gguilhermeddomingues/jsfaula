@@ -1,0 +1,30 @@
+.ui-widget {
+	font-size: 14px;
+}
+
+.ui-picklist-list {
+	width: 100% !important;
+}
+
+.ui-picklist {
+	width: 100% !important;
+}
+
+div.content-left {
+	float:left; 
+	width: 20%;
+}
+
+div.content-right {
+	float:left; 
+	width: 80%;
+}
+
+.inner-content {
+	padding-left: 10px;
+}
+
+.ui-panel-content {
+	padding: 0px !important;
+}
+
